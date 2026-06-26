@@ -3,12 +3,12 @@
    Date de Soumission:26/06/2026
 
       réseume de la séance-02
-      
+
 Durant cette deuxième séance, j'ai compris que la conteneurisation, portée par Docker, est une solution très efficace pour résoudre le problème classique du "ça marche sur ma machine, mais pas ailleurs". Contrairement aux machines virtuelles qui sont lourdes car elles embarquent un système d'exploitation entier, Docker utilise les fonctionnalités natives du noyau Linux (les namespaces pour l'isolation et les cgroups pour la gestion des ressources) afin de créer des conteneurs beaucoup plus légers et rapides. Ce que j'ai surtout retenu, c'est que la vraie révolution de Docker n'est pas technologique, mais ergonomique : grâce au Dockerfile, à la simplicité des commandes et aux registres d'images, on peut désormais packager une application avec toutes ses dépendances pour la déployer partout de manière identique. C'est cette standardisation, combinée à l'orchestration avec Docker Compose, qui permet aujourd'hui de gérer facilement des architectures complexes.
 
 Exercices d'application séance-02
-    Reponses aux applications
-    Exercice 1 : QCM conceptuel
+Reponses aux applications
+Exercice 1 : QCM conceptuel
 
 1.1 : C. Un conteneur utilise le noyau de l'hôte
 
@@ -35,7 +35,8 @@ Justification: Docker a standardisé l'écosystème (format d'image, registre, C
 1.8 : B.Open Container Initiative — une norme ouverte pour les images et le runtime
 Justification: L'OCI définit les standards ouverts pour que les conteneurs soient interopérables entre les différents outils.
 
-            Exercice 2 : Dockerfile
+Exercice 2 : Dockerfile
+
 2.1 Explication des instructions
 FROM : Définit l'image de base.
 
@@ -75,7 +76,7 @@ USER appuser
 EXPOSE 5000
 CMD ["python", "main.py"]
 
-     Exercice 3 : Diagnostic
+Exercice 3 : Diagnostic
      
 3.1 Le build qui échoue
 a. Le RUN pip install est exécuté avant le COPY . .. Le fichier requirements.txt n'est pas encore présent dans le système de fichiers du conteneur au moment de l'installation.
@@ -91,11 +92,9 @@ b. Remplacer localhost par le nom du service : postgresql://user:password@db:543
 
 Exercice 4 : Optimisation
 a. Problèmes :
-
 ubuntu:22.04 est trop lourd. 2. apt-get non nettoyé (laisse des fichiers temporaires). 3. Installation de packages inutiles (build-essential). 4. Tout le code copié avant pip install (cache inutile).
 
 b. Version optimisée :
-
 Dockerfile
 FROM python:3.11-slim
 # Nettoyage des caches apt pour réduire la taille
@@ -105,6 +104,7 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 CMD ["python", "downloader.py"]
+
 Exercice 5 : Mini-cas d'architecture
 a. Services :
 
@@ -116,27 +116,49 @@ jupyter : Interface d'exploration pour Awa.
 
 b. Restart policy : on-failure. Il n'a pas besoin de tourner en continu (c'est un traitement nocturne). S'il échoue, on veut qu'il réessaie, mais une fois fini, il doit s'arrêter proprement.
 
-c. Passer la date : 1. Variable d'environnement (ENV DATE=2026-06-23). 2. Argument de ligne de commande via CMD au lancement. Recommandé : Variable d'environnement, plus simple à injecter via docker run -e ou un fichier .env.
+c. Passer la date : 
+1. Variable d'environnement (ENV DATE=2026-06-23). 
+2. Argument de ligne de commande via CMD au lancement. Recommandé : Variable d'environnement, plus simple à injecter via docker run -e ou un fichier .env.
 
 d. Séparation : Le script de traitement (pipeline) et Jupyter (exploration) ont des cycles de vie et des besoins de ressources différents. Séparer permet de ne pas surcharger Jupyter avec les dépendances du pipeline et de garantir que le crash de l'un n'affecte pas l'autre.
 
 e. Squelette docker-compose.yml :
 
-YAML
+yaml
 services:
   minio:
     image: minio/minio
-    command: server /data
+    command: server /data --console-address ":9001"
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - minio-data:/data
+
   worker:
     build: ./pipeline
     environment:
       - DATE=2026-06-23
     depends_on:
       - minio
+
   jupyter:
     image: jupyter/datascience-notebook
     volumes:
       - ./notebooks:/home/jovyan/work
     ports:
       - "8888:8888"
-[Image du fonctionnement de Docker avec les couches et le noyau partagé]    
+    depends_on:
+      - minio
+
+volumes:
+  minio-data:
+
+## Captures
+
+![Capture 1](./captures/image1.png)
+![Capture 2](./captures/image2.png)
+![Capture 3](./captures/image3.png)
+![Capture 4](./captures/image4.png)
+![Capture 5](./captures/image5.png)
+![Capture 6](./captures/image6.png)
