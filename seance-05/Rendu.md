@@ -5,6 +5,7 @@
 
 ## Résumé de la séance 5
 
+Cette séance a consisté à déployer un cluster Spark standalone (un master, deux workers) et un stockage MinIO via Docker Compose pour simuler un data lake. Deux jobs PySpark y ont été exécutés via spark-submit avec le connecteur S3A pour traiter des données de transport d'Anfa et simuler jusqu'à 100 000 trajets. Les résultats ont été sauvegardés sur MinIO aux formats optimisés Parquet et partitionné après des opérations de groupement impliquant un shuffle. L'analyse finale a mis en évidence que le mode cluster n'est avantageux par rapport au mode local que pour de grands volumes de données en raison de l'overhead réseau. Enfin, l'initiation à Spark sur Kubernetes a ouvert la voie à la prochaine étape dédiée à l'orchestration automatisée avec Apache Airflow.
 
 ## Étapes principales
 1. Déploiement du cluster Spark standalone (1 master + 2 workers) via Docker Compose.
