@@ -1,8 +1,8 @@
 # Rendu : Séance 6
 
-**Nom et prénom :** Denis AKPAGNONITE
-**Identifiant GitHub :** <votre-username>
-**Date de soumission :** <JJ/MM/AAAA>
+**Nom et prénom :** DJAGBA Kuinambe Véronique
+**Identifiant GitHub :** DJAGBA
+**Date de soumission :** 03/07/2026
 
 ## Résumé de la séance
 
@@ -29,9 +29,6 @@ propagation d'échec ont été observés via un bug volontaire.
 
 ### DAG anfa_pipeline_quotidien complet en succès
 ![Pipeline Anfa](captures/pipeline-anfa-graph.png)
-
-### Logs de la tâche `verifier_resultats`
-![Logs verifier](captures/logs-verifier-resultats.png)
 
 ### Démonstration du retry : tâche en échec et propagation
 ![Retry et échec](captures/retry-failed.png)
