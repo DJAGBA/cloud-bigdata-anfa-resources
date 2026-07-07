@@ -1,8 +1,8 @@
 # Rendu — Séance 9
 
-**Nom et prénom :** <Votre nom complet>
-**Identifiant GitHub :** <votre-username>
-**Date de soumission :** <JJ/MM/AAAA>
+**Nom et prénom :** DJAGBA Kuinambe Véronique
+**Identifiant GitHub :** DJAGBA
+**Date de soumission :** 07/07/2026
 
 ## Résumé de la séance
 
@@ -31,9 +31,7 @@ instrumenté, dashboard construit, alerte configurée et déclenchée sur panne 
 
 ## Réflexion personnelle
 
-<3-5 lignes : en quoi cette séance répond-elle directement à la situation-problème
-d'Awa dans le CM ? Qu'est-ce que la métrique de fraîcheur vous a permis de voir que
-les autres métriques (CPU, RAM, statut des conteneurs) ne montraient pas ?>
+La séance illustre parfaitement le problème rencontré par Awa : un pipeline techniquement “succès” mais produisant un résultat vide. Ici, la jauge de fraîcheur montre qu’un exportateur peut rester actif sans générer de données utiles. Ce type de panne silencieuse échappe aux métriques classiques (CPU, RAM, conteneurs en cours d’exécution), mais l’observabilité permet de la détecter rapidement. On gagne ainsi un temps précieux et on évite que l’utilisateur final découvre l’incident en premier.
 
 ## Difficultés rencontrées
 
