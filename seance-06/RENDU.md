@@ -35,8 +35,7 @@ propagation d'échec ont été observés via un bug volontaire.
 
 ## Réflexion personnelle
 
-<3-5 lignes : qu'apporte Airflow par rapport à un cron simple ?
-Dans quel cas l'utiliser sur un vrai projet ?>
+Airflow apporte bien plus qu’un simple cron : il gère les dépendances entre tâches, les retries automatiques en cas d’échec, la visualisation des pipelines et la reprise après correction. Là où cron ne fait qu’exécuter une commande à heure fixe, Airflow orchestre des workflows complexes avec suivi, logs et alertes. On l’utilise sur un vrai projet dès qu’il faut coordonner plusieurs étapes interdépendantes (ETL, analyses Spark, vérifications, notifications) et garantir fiabilité et traçabilité du pipeline.
 
 ## Difficultés rencontrées
 
