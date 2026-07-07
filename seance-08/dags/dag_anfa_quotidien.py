@@ -32,7 +32,7 @@ def verifier_resultats():
 
 def notifier():
     resume = {"nb_fichiers": 4, "taille_totale_ko": 128.5}   # exemple pour ce TP
-    print(construire_message_notification(resume)) # ← logique testée
+    print(construire_message_notification(resume))            # ← logique testée
 
 
 default_args = {"owner": "anfa-data-team", "retries": 2, "retry_delay": timedelta(seconds=30)}
