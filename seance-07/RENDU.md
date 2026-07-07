@@ -37,9 +37,7 @@ tolérance aux pannes observée, Spark Structured Streaming consommant et agrég
 
 ## Réflexion personnelle
 
-<3-5 lignes : dans quel cas utiliseriez-vous Kafka + Spark Streaming plutôt que le pipeline batch
-Airflow + Spark vu en séance 5-6 ? Qu'est-ce que la réplication à 3 brokers vous a concrètement montré ?>
-
+Kafka + Spark Streaming est utile quand il faut traiter des flux en temps réel, comme suivre la position des bus ou détecter des anomalies instantanément. Le pipeline batch Airflow + Spark des séances 5–6 reste adapté aux traitements différés, par exemple les rapports quotidiens. La réplication sur 3 brokers m’a montré concrètement que le cluster continue de fonctionner même si un nœud tombe. Les partitions basculent automatiquement vers un autre leader, garantissant disponibilité et absence de perte de données.
 ## Réponses aux exercices d'application
 
 <À compléter d'après les énoncés fournis avec l'assignment.>
