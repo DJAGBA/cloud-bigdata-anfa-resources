@@ -26,8 +26,7 @@
 
 ## Réflexion personnelle
 
-<3-5 lignes : en quoi ce pipeline aurait-il empêché l'incident de Mawuli
-(situation-problème du CM) ? Qu'est-ce que `needs:` change concrètement ?>
+Ce pipeline aurait empêché l’incident de Mawuli car les tests unitaires auraient détecté l’erreur avant le déploiement, bloquant ainsi la mise en production d’un DAG incorrect. L’instruction needs: dans GitHub Actions force le job de déploiement à attendre le succès du job de validation. Concrètement, cela signifie qu’aucun déploiement n’est possible tant que les tests ne sont pas verts, garantissant la qualité et la fiabilité du pipeline.
 
 ## Difficultés rencontrées
 
